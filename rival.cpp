@@ -1,8 +1,12 @@
 #include "rival.h"
 #include "iostream"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
 
 Rival::Rival(string in_name, char in_code, double in_speed, double hp, double phys_dmg, double magic_dmg, double def, int id, BattleArena * arena) :GameObject(arena->GetLocation(), id, 'R') {
+    srand((unsigned)time(NULL));
     name = in_name;
     speed = in_speed;
     health = hp;
