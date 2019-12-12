@@ -84,6 +84,7 @@ class Pokemon : public GameObject {
     PokemonGym* current_gym;
     Point2D destination;
     Vector2D delta;
+    // int level; // i tried implementing a level variable but i am getting sef faults.
 
 };
 

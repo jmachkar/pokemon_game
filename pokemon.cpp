@@ -29,6 +29,7 @@ Pokemon::Pokemon() : GameObject(){
     magical_damage = 4;
     defense = 15;
     target = 0;
+    // level = 1;
     cout<<"Pokemon default constructed"<<endl;
 }
 
@@ -55,6 +56,7 @@ Pokemon::Pokemon(char in_code) : GameObject(in_code){
     magical_damage = 4;
     defense = 15;
     target = 0;
+    // level = 1;
     cout << "Pokemon constructed"<<endl;
 }
 
@@ -81,6 +83,7 @@ Pokemon::Pokemon(string in_name, int in_id, char in_code, double in_speed, doubl
     magical_damage = magic_dmg;
     defense = def;
     target = 0;
+    // level = 1;
     cout<<"Pokemon constructed"<<endl;
 }
 
@@ -280,7 +283,7 @@ void Pokemon::ShowStatus(){
     cout<<"        Stamina: "<<stamina<<endl<<"        Pokemon Dollars: "<<pokemon_dollars<<endl<<"        Experience Points: "<<experience_points<<endl;
     cout<<"        Health: "<<health<<endl<<"        Physical damage: "<<physical_damage<<endl;
     cout<<"        Magical damage: "<<magical_damage<<endl<<"        Defense: "<<defense<<endl;
-
+    // cout<<"        Level: "<<level<<endl;
     switch (state)
     {
     case STOPPED:
@@ -438,8 +441,16 @@ bool Pokemon::Update(){
         stamina -= current_gym->GetStaminaCost(training_units_to_buy);
         pokemon_dollars -= current_gym->GetDollarCost(training_units_to_buy);
         experience_points += current_gym->TrainPokemon(training_units_to_buy);
+        while(experience_points > 7){
+            physical_damage++;
+            magical_damage++;
+            health++;
+            experience_points -= 7;
+            // level++;
+            cout<<"Level up!"<<endl;
+        }
         cout<<"**"<<name<<" completed "<<training_units_to_buy<<" training unit(s)!**"<<endl;
-        cout<<"**"<<name<<" gained "<<experience_points<<" experience point(s)!**"<<endl;
+        cout<<"**"<<name<<" gained "<<current_gym->TrainPokemon(training_units_to_buy)<<" experience point(s)!**"<<endl;
         state = IN_GYM;
         return true;
         break;
